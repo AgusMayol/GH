@@ -1,0 +1,43 @@
+*,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+
+    user-select: none;
+}
+
+html {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    //overflow: hidden !important;
+
+    user-select: none;
+
+    body::-webkit-scrollbar-thumb {
+        background-color: #6E6E6E;
+        /* color of the scroll thumb */
+        border-radius: 9px;
+        /* roundness of the scroll thumb */
+        border: 2px solid white;
+        /* creates padding around scroll thumb */
+    }
+
+    body::-webkit-scrollbar {
+        width: 9px;
+        /* width of the entire scrollbar */
+    }
+
+    .grillado {
+        @extend body;
+        background-image: none;
+    }
+}
