@@ -14,11 +14,11 @@ h6 {
 }
 
 html {
-    min-height: 100vh;
+    height: 100vh;
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
-    //overflow: hidden !important;
+    overflow: hidden !important;
 
     user-select: none;
 

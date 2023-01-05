@@ -36,37 +36,42 @@
 
 <body onload="fecha();">
 
-    <nav class="navbar navbar-expand-lg bg-black">
-        <div class="container-fluid">
-            <a class="navbar-brand text-light" href="#">
-                <img src="./assets/images/logo2.png" alt="Bootstrap" style="width: 90px; height: 60px;"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link text-light" aria-current="page" href="./index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="./sections/votar.html">Votar</a>
-                    </li>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-black">
+            <div style="width: 100%;">
+                <ul>
+                    <div class="d-flex flex-nowrap justify-content-start align-items-center">
+                        <a class="navbar-brand text-light" href="./index.html">
+                            <img src="../assets/images/logo2.png" alt="Bootstrap" style="width: 90px; height: 60px;">
+                        </a>
 
-                </ul>
+                        <ul class="d-flex justify-content-between align-items-center" style="list-style:none;">
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-light" href="./index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" aria-current="page"
+                                    href="./sections/votar.html">Votar</a>
+                            </li>
+
+                        </ul>
+                    </div>
             </div>
-        </div>
-    </nav>
+            </ul>
+            </div>
+        </nav>
+    </header>
 
-    <img class="img-bkgd mb-5" src="./assets/images/bkgdHD.jpg" alt="">
+    <img class="img-bkgd" src="./assets/images/bkgdHD.jpg" alt="">
 
     <div class="d-flex flex-column justify-content-center align-items-center">
-        <h1>GRAN <span>HERMANO</span></h1>
+        <h1 id="h1-index">GRAN <span>HERMANO</span></h1>
 
         <h6 class="text-light fs-4">VOTACIÓN ABIERTA DÍA <span id="fecha"></span></h6>
         <a href="./sections/votar.html" class="btn btn-warning btn-lg mt-5">IR A VOTAR</a>
     </div>
+
+
 
     <!-- AOS ANIMATIONS SCRIPT -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

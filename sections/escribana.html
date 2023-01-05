@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-escribana">
 
 <head>
     <meta charset="UTF-8">
@@ -34,58 +34,65 @@
     <title>Gran Hermano | Escribana</title>
 </head>
 
-<body onload="mostrar_escribana(); fecha();">
-
-    <img class="img-bkgd" src="../assets/images/paper.png" alt="">
-    <img class="img-firma" src="../assets/images/firma.png" alt="">
+<body onload="fecha(); mostrar_escribana();">
 
     <div class="d-flex flex-column justify-content-start align-items-center mt-2">
 
-        <h1 class="text-dark">GRAN <span>HERMANO</span></p>
+        <h1 class="text-dark" id="h1-escribana">GRAN <span>HERMANO</span></p>
 
 
-            <h6 class="text-dark fs-4">Porcentajes Gala de Eliminación <span id="fecha"></span></h6>
+            <h6 class="text-dark fs-4" id="porcentajes">Porcentajes Gala de Eliminación <span id="fecha"></span></h6>
 
-            <div class="d-flex justify-content-center align-items-center mt-5">
+            <div class="d-flex flex-wrap justify-content-center align-items-center mt-5">
 
-                <div class="d-flex flex-column justify-content-center align-items-center me-5" id="card-julieta">
+                <a href="../index.html"
+                    class="d-flex flex-column justify-content-center align-items-center me-5 text-decoration-none text-dark"
+                    id="card-julieta">
                     <div class="card" style="border-radius: 0;">
                         <img src="../assets/images/julieta.jpg" class="card-img-top" alt="" style="border-radius: 0;">
                     </div>
 
                     <h3 class="nombre-esc">JULIETA</h3>
                     <h4 class="porc mt-3" id="votosjulieta">0%</h4>
-                </div>
+                </a>
 
 
-                <div class="d-flex flex-column justify-content-center align-items-center me-5" id="card-coti">
+                <a href="../index.html"
+                    class="d-flex flex-column justify-content-center align-items-center me-5 text-decoration-none text-dark"
+                    id="card-coti">
                     <div class="card" style="border-radius: 0;">
                         <img src="../assets/images/coti.jpg" class="card-img-top" alt="" style="border-radius: 0;">
                     </div>
                     <h3 class="nombre-esc">COTI</h3>
                     <h4 class="porc mt-3" id="votoscoti">0%</h4>
-                </div>
+                </a>
 
 
-                <div class="d-flex flex-column justify-content-center align-items-center me-5" id="card-daniela">
+                <a href="../index.html"
+                    class="d-flex flex-column justify-content-center align-items-center me-5 text-decoration-none text-dark"
+                    id="card-daniela">
                     <div class="card" style="border-radius: 0;">
                         <img src="../assets/images/daniela.jpg" class="card-img-top" alt="" style="border-radius: 0;">
                     </div>
                     <h3 class="nombre-esc">DANIELA</h3>
                     <h4 class="porc mt-3" id="votosdaniela">0%</h4>
-                </div>
+                </a>
 
 
-                <div class="d-flex flex-column justify-content-center align-items-center me-5" id="card-romina">
+                <a href="../index.html"
+                    class="d-flex flex-column justify-content-center align-items-center me-5 text-decoration-none text-dark"
+                    id="card-romina">
                     <div class="card" style="border-radius: 0;">
                         <img src="../assets/images/romina.jpg" class="card-img-top" alt="" style="border-radius: 0;">
                     </div>
                     <h3 class="nombre-esc">ROMINA</h3>
                     <h4 class="porc mt-3" id="votosromina">0%</h4>
-                </div>
+                </a>
 
 
             </div>
+
+            <img class="img-firma" src="../assets/images/firma.png" alt="">
 
     </div>
 

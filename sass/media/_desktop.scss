@@ -7,11 +7,11 @@
         height: 100%;
         user-select: none;
         pointer-events: none;
+        margin-top: -15%;
     }
 
     .img-firma {
-        width: 600px;
-        margin-top: -270px;
+        margin-top: -530px;
         margin-left: 850px;
         opacity: 0.7;
         width: 300px;
@@ -22,7 +22,6 @@
     h1 {
         color: white;
         z-index: 99;
-        margin-top: -70%;
         font-family: 'Parsi-Regular', sans-serif;
         user-select: none;
         pointer-events: none;
@@ -134,6 +133,70 @@
 
     .btn-outline-warning {
         box-shadow: 0 2px 20px RGBA(255, 193, 7, 0.75);
+    }
+
+    #h1-index {
+        margin-top: -75%;
+    }
+
+    #html-votar {
+        overflow-y: auto !important;
+
+        background-color: RGB(21, 21, 85);
+
+        body {
+            background-color: RGB(21, 21, 85);
+        }
+    }
+
+    #h1-votar {
+        margin-top: 20px;
+    }
+
+    #quien {
+        text-align: center;
+    }
+
+    #card-julieta {
+        margin-right: 16px !important;
+        margin-top: 0px !important;
+        z-index: 9;
+    }
+
+    #card-coti {
+        margin-right: 16px !important;
+        margin-top: 0px !important;
+        z-index: 9;
+    }
+
+    #card-daniela {
+        margin-right: 16px !important;
+        margin-top: 0px !important;
+        z-index: 9;
+    }
+
+    #card-romina {
+        margin-right: 16px !important;
+        margin-top: 0px !important;
+        z-index: 9;
+    }
+
+    #html-escribana {
+        overflow-y: auto !important;
+
+        background-color: #F3F3F3;
+
+        body {
+            background-color: #F3F3F3;
+        }
+    }
+
+    #h1-escribana {
+        margin-top: 20px;
+    }
+
+    #porcentajes {
+        text-align: center;
     }
 
 }

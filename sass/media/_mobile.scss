@@ -1,9 +1,5 @@
 @media (min-width: $mobile) {
 
-    html {
-        overflow: auto;
-    }
-
     .img-bkgd {
         aspect-ratio: 4/3;
         object-fit: cover;
@@ -11,22 +7,20 @@
         height: 100vh;
         user-select: none;
         pointer-events: none;
+        margin-top: -15%;
     }
 
     .img-firma {
-        width: 600px;
-        margin-top: -270px;
-        margin-left: 850px;
         opacity: 0.7;
         width: 300px;
         user-select: none;
         pointer-events: none;
+        margin-top: 20px;
     }
 
     h1 {
         color: white;
         z-index: 99;
-        margin-top: -200%;
         font-family: 'Parsi-Regular', sans-serif;
         user-select: none;
         pointer-events: none;
@@ -132,4 +126,71 @@
         pointer-events: none;
     }
 
+    .btn-outline-danger {
+        box-shadow: 0 2px 20px RGBA(220, 53, 40, 0.75);
+    }
+
+    .btn-outline-warning {
+        box-shadow: 0 2px 20px RGBA(255, 193, 7, 0.75);
+    }
+
+    #h1-index {
+        margin-top: -815px;
+    }
+
+    #html-votar {
+        overflow-y: auto !important;
+
+        background-color: RGB(21, 21, 85);
+
+        body {
+            background-color: RGB(21, 21, 85);
+        }
+    }
+
+    #h1-votar {
+        margin-top: 20px;
+    }
+
+    #quien {
+        text-align: center;
+    }
+
+    #card-julieta {
+        margin-right: 0 !important;
+        margin-top: 60px;
+    }
+
+    #card-coti {
+        margin-right: 0 !important;
+        margin-top: 60px;
+    }
+
+    #card-daniela {
+        margin-right: 0 !important;
+        margin-top: 60px;
+    }
+
+    #card-romina {
+        margin-right: 0 !important;
+        margin-top: 60px;
+    }
+
+    #html-escribana {
+        overflow-y: auto !important;
+
+        background-color: #F3F3F3;
+
+        body {
+            background-color: #F3F3F3;
+        }
+    }
+
+    #h1-escribana {
+        margin-top: 20px;
+    }
+
+    #porcentajes {
+        text-align: center;
+    }
 }

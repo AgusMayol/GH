@@ -1,3 +1,4 @@
+//Fecha que se muestra en index y escribana
 function fecha() {
     let date = new Date()
 
@@ -7,20 +8,22 @@ function fecha() {
     let fecha = "";
     
     if(month < 10){
-      fecha = `${day}/0${month}/${year}`;
+      
+      if (day < 10) {
+        fecha = `0${day}/0${month}/${year}`;
+      } else {
+        fecha = `${day}/0${month}/${year}`;
+      }
     }else{
       fecha = `${day}/${month}/${year}`;
     }
     
+    console.log("Hoy es: " + fecha)
     document.getElementById("fecha").innerHTML = fecha;
 }
 
-console.log("Qué mirá' bobo?")
-console.log("Andá pa' allá 🇦🇷")
-
 
 // Proceso de voto
-
 let part_selec = "";
 let voto_selec = 1;
 
@@ -39,9 +42,6 @@ function votoselec(cantidad) {
 
 
 function votar() {
-
-
-    console.log(part_selec)
 
     if(part_selec == "julieta") {
         julieta = julieta+voto_selec
@@ -70,6 +70,8 @@ function votar() {
     }, 0250)
 
 }
+
+//Función para ver el eliminado con más votos
 
 function verResultados(){
 
@@ -195,13 +197,13 @@ function verResultados(){
     }
 
     if(votación[0] == votación[1]) {
-        document.getElementById("verEscribana").href = `./escribana.html?votosjulieta=${porcentaje_julieta}&votoscoti=${porcentaje_coti}&votosdaniela=${porcentaje_daniela}&votosromina=${porcentaje_romina}`
-        document.getElementById("verEscribana").style.display = "block";
-        return alert("Suceso inédito: Empate entre dos participantes. Se recomienda pedir escribana.")
+        return alert("Suceso inédito: Empate entre dos participantes. Se recomienda dejar la votación abierta unos instantes.")
         
     }
 
     let sale = votación[0];
+
+    //Acá según el participante eliminado, se le cambia algunas propiedades a tu .card y se ocultan las demás.
 
     if(sale == julieta) {
         document.getElementById("julieta").innerHTML = "ELIMINADA";
@@ -268,7 +270,11 @@ function verResultados(){
 
     resultados = 1;
 
+    console.log(`RESULTADOS: Julieta (${porcentaje_julieta}%), Coti (${porcentaje_coti}%), Daniela (${porcentaje_daniela}%), Romina (${porcentaje_romina}%)`)
+
 }
+
+//Cambia el título del modal según el participante elegido a votar
 
 function modal(participante) {
 
@@ -278,15 +284,17 @@ function modal(participante) {
 
     part_selec = participante;
 
+    console.log("Seleccionaste a " + part_selec)
+
     document.getElementById("modal-btn-title").innerHTML = "VOTAR A " + participante.toUpperCase();
     document.getElementById("modal-btn-votar").innerHTML = "VOTAR A " + participante.toUpperCase();
 }
 
+//Toma los parámetros de la URL y los ingresa como variables, para ser mostrados como porcentajes.
+
 function mostrar_escribana() {
-/**
- * @param String name
- * @return String
- */
+
+// Resuelva la URL para obtener el valor de los votos de cada participante.
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -299,184 +307,56 @@ let votoscoti = getParameterByName('votoscoti');
 let votosdaniela = getParameterByName('votosdaniela');
 let votosromina = getParameterByName('votosromina');
 
+
+//Revisa si por alguna razón, el número es más largo de lo esperado
+if(votosjulieta.length > 5) {
+    votosjulieta = Math.trunc(votosjulieta);
+
+}
+
+if(votoscoti.length > 5) {
+    votoscoti = Math.trunc(votoscoti);
+
+}
+
+if(votosdaniela.length > 5) {
+    votosdaniela = Math.trunc(votosdaniela);
+
+}
+
+if(votosromina.length > 5) {
+    votosromina = Math.trunc(votosromina);
+
+}
+
 document.getElementById("votosjulieta").innerHTML =  + votosjulieta + "%";
 document.getElementById("votoscoti").innerHTML =  + votoscoti + "%";
 document.getElementById("votosdaniela").innerHTML =  + votosdaniela + "%";
 document.getElementById("votosromina").innerHTML =  + votosromina + "%";
 
+//Ordena de MAYOR porcentaje A MENOR porcentaje. [CICLO]
+
 let orden = [votosjulieta, votoscoti, votosdaniela, votosromina]
     orden = orden.sort(function(a, b){return b - a}); // --> 23, 12, 3
 
-    if(orden[0] == votosjulieta) {
-        document.getElementById("card-julieta").style.order = "1";
+    let participants = ['julieta', 'coti', 'daniela', 'romina'];
+let votes = [votosjulieta, votoscoti, votosdaniela, votosromina];
 
-        if(orden[1] == votoscoti) {
-            document.getElementById("card-coti").style.order = "2";
+for (let i = 0; i < participants.length; i++) {
+  if (votes[i] === orden[0]) {
+    document.getElementById(`card-${participants[i]}`).style.order = "1";
+    console.log(participants[i] + ": " + votes[i] + "%")
+  } else if (votes[i] === orden[1]) {
+    document.getElementById(`card-${participants[i]}`).style.order = "2";
+    console.log(participants[i] + ": " + votes[i] + "%")
+  } else if (votes[i] === orden[2]) {
+    document.getElementById(`card-${participants[i]}`).style.order = "3";
+    console.log(participants[i] + ": " + votes[i] + "%")
+  } else {
+    document.getElementById(`card-${participants[i]}`).style.order = "4";
+    console.log(participants[i] + ": " + votes[i] + "%")
+  }
 
-            if(orden[2] == votosdaniela) {
-                document.getElementById("card-daniela").style.order = "3";
-                document.getElementById("card-romina").style.order = "4";
-                document.getElementById("card-romina").classList.remove("me-5");
-            } else {
-                    document.getElementById("card-romina").style.order = "3";
-                    document.getElementById("card-daniela").style.order = "4";
-                    document.getElementById("card-daniela").classList.remove("me-5");
-            }
-
-        } else if(orden[1] == votosdaniela) {
-                document.getElementById("card-daniela").style.order = "2";
-
-                if(orden[2] == votoscoti) {
-                    document.getElementById("card-coti").style.order = "3";
-                    document.getElementById("card-romina").style.order = "4";
-                    document.getElementById("card-romina").classList.remove("me-5");
-                } else {
-                        document.getElementById("card-romina").style.order = "3";
-                        document.getElementById("card-coti").style.order = "4";
-                        document.getElementById("card-coti").classList.remove("me-5");
-                }
-
-        }else if(orden[1] == votosromina) {
-            document.getElementById("card-romina").style.order = "2";
-
-            if(orden[2] == votosdaniela) {
-                document.getElementById("card-daniela").style.order = "3";
-                document.getElementById("card-coti").style.order = "4";
-                document.getElementById("card-coti").classList.remove("me-5");
-            } else {
-                    document.getElementById("card-coti").style.order = "3";
-                    document.getElementById("card-daniela").style.order = "4";
-                    document.getElementById("card-daniela").classList.remove("me-5");
-            }
-        }  
-    } else if(orden[0] == votoscoti) {
-        document.getElementById("card-coti").style.order = "1";
-
-        if(orden[1] == votosjulieta) {
-            document.getElementById("card-julieta").style.order = "2";
-
-            if(orden[2] == votosdaniela) {
-                document.getElementById("card-daniela").style.order = "3";
-                document.getElementById("card-romina").style.order = "4";
-                document.getElementById("card-romina").classList.remove("me-5");
-            } else {
-                    document.getElementById("card-romina").style.order = "3";
-                    document.getElementById("card-daniela").style.order = "4";
-                    document.getElementById("card-daniela").classList.remove("me-5");
-            }
-
-        } else if(orden[1] == votosdaniela) {
-                document.getElementById("card-daniela").style.order = "2";
-
-                if(orden[2] == votosjulieta) {
-                    document.getElementById("card-julieta").style.order = "3";
-                    document.getElementById("card-romina").style.order = "4";
-                    document.getElementById("card-romina").classList.remove("me-5");
-                } else {
-                        document.getElementById("card-romina").style.order = "3";
-                        document.getElementById("card-julieta").style.order = "4";
-                        document.getElementById("card-julieta").classList.remove("me-5");
-                }
-
-        }else if(orden[1] == votosromina) {
-            document.getElementById("card-romina").style.order = "2";
-
-            if(orden[2] == votosdaniela) {
-                document.getElementById("card-daniela").style.order = "3";
-                document.getElementById("card-julieta").style.order = "4";
-                document.getElementById("card-julieta").classList.remove("me-5");
-            } else {
-                    document.getElementById("card-julieta").style.order = "3";
-                    document.getElementById("card-daniela").style.order = "4";
-                    document.getElementById("card-daniela").classList.remove("me-5");
-            }
-        }  
-    } else if(orden[0] == votosdaniela) {
-        document.getElementById("card-daniela").style.order = "1";
-
-        if(orden[1] == votosjulieta) {
-            document.getElementById("card-julieta").style.order = "2";
-            if(orden[2] == votoscoti) {
-                document.getElementById("card-coti").style.order = "3";
-                document.getElementById("card-romina").style.order = "4";
-                document.getElementById("card-romina").classList.remove("me-5");
-            } else {
-                    document.getElementById("card-romina").style.order = "3";
-                    document.getElementById("card-coti").style.order = "4";
-                    document.getElementById("card-coti").classList.remove("me-5");
-            }
-
-        } else if(orden[1] == votoscoti) {
-                document.getElementById("card-coti").style.order = "2";
-
-                if(orden[2] == votosjulieta) {
-                    document.getElementById("card-julieta").style.order = "3";
-                    document.getElementById("card-romina").style.order = "4";
-                    document.getElementById("card-romina").classList.remove("me-5");
-                } else {
-                        document.getElementById("card-romina").style.order = "3";
-                        document.getElementById("card-julieta").style.order = "4";
-                        document.getElementById("card-julieta").classList.remove("me-5");
-                }
-
-        }else if(orden[1] == votosromina) {
-            document.getElementById("card-romina").style.order = "2";
-
-            if(orden[2] == votoscoti) {
-                document.getElementById("card-coti").style.order = "3";
-                document.getElementById("card-julieta").style.order = "4";
-                document.getElementById("card-julieta").classList.remove("me-5");
-            } else {
-                    document.getElementById("card-julieta").style.order = "3";
-                    document.getElementById("card-coti").style.order = "4";
-                    document.getElementById("card-coti").classList.remove("me-5");
-            }
-        }  
-    } else if(orden[0] == votosromina) {
-        document.getElementById("card-romina").style.order = "1";
-        document.getElementById("card-romina").classList.add("me-5");
-
-        if(orden[1] == votosjulieta) {
-            document.getElementById("card-julieta").style.order = "2";
-
-            if(orden[2] == votoscoti) {
-                document.getElementById("card-coti").style.order = "3";
-                document.getElementById("card-daniela").style.order = "4";
-                document.getElementById("card-daniela").classList.remove("me-5");
-            } else {
-                    document.getElementById("card-daniela").style.order = "3";
-                    document.getElementById("card-coti").style.order = "4";
-                    document.getElementById("card-coti").classList.remove("me-5");
-            }
-
-        } else if(orden[1] == votoscoti) {
-                document.getElementById("card-coti").style.order = "2";
-
-                if(orden[2] == votosjulieta) {
-                    document.getElementById("card-julieta").style.order = "3";
-                    document.getElementById("card-daniela").style.order = "4";
-                    document.getElementById("card-daniela").classList.remove("me-5");
-                } else {
-                        document.getElementById("card-daniela").style.order = "3";
-                        document.getElementById("card-julieta").style.order = "4";
-                        document.getElementById("card-julieta").classList.remove("me-5");
-                }
-
-        }else if(orden[1] == votosdaniela) {
-            document.getElementById("card-daniela").style.order = "2";
-
-            if(orden[2] == votoscoti) {
-                document.getElementById("card-coti").style.order = "3";
-                document.getElementById("card-julieta").style.order = "4";
-                document.getElementById("card-julieta").classList.remove("me-5");
-            } else {
-                    document.getElementById("card-julieta").style.order = "3";
-                    document.getElementById("card-coti").style.order = "4";
-                    document.getElementById("card-coti").classList.remove("me-5");
-            }
-        }  
-    }
-
-
+}
 
 }

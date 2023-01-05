@@ -1,1 +1,196 @@
-@media (min-width: $tablet) {}
+@media (min-width: $tablet) {
+
+    .img-bkgd {
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        width: 100vw;
+        height: 100vh;
+        user-select: none;
+        pointer-events: none;
+        margin-top: -15%;
+    }
+
+    .img-firma {
+        opacity: 0.7;
+        width: 300px;
+        user-select: none;
+        pointer-events: none;
+        margin-top: 20px;
+    }
+
+    h1 {
+        color: white;
+        z-index: 99;
+        font-family: 'Parsi-Regular', sans-serif;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    span {
+        font-family: 'Parsi-Bold', sans-serif;
+        font-weight: bold;
+        z-index: 99;
+        margin-top: -50%;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    .card {
+        transform: translateY(0px);
+        transition: all 0.2s ease-out;
+        cursor: pointer;
+        user-select: none;
+
+        width: 16rem;
+        height: 15rem;
+        border-radius: 12px;
+        border: none;
+
+        img {
+            border-radius: 12px;
+            aspect-ratio: 4/3;
+            width: 100%;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .card-body2 {
+            margin-top: -83%;
+            border-radius: 8px;
+            height: 213.33px;
+            z-index: 999;
+
+            background: none;
+            background: -moz-linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+            background: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+            background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#000000", GradientType=1);
+
+            user-select: none;
+            pointer-events: none;
+
+            h5 {
+                margin-top: 65%;
+                margin-left: 20px;
+                color: white;
+                font-family: 'Poppins', sans-serif;
+
+                user-select: none;
+                pointer-events: none;
+            }
+        }
+    }
+
+    .card:hover {
+        transform: translateY(-20px);
+        transition: all 0.2s ease-out;
+    }
+
+    .btn {
+        border-radius: 50px;
+    }
+
+    .nombre-esc {
+        font-size: 30px;
+        font-weight: bold;
+
+        user-select: none;
+        pointer-events: none;
+    }
+
+    .porc {
+        font-family: 'Kaushan Script', sans-serif;
+        font-size: 60px;
+        font-weight: bold;
+
+        user-select: none;
+        pointer-events: none;
+    }
+
+    #fecha {
+        font-weight: normal;
+        font-family: 'Poppins', sans-serif;
+
+        user-select: none;
+        pointer-events: none;
+    }
+
+    h6 {
+        font-family: 'Poppins', sans-serif;
+
+        user-select: none;
+        pointer-events: none;
+    }
+
+    .btn-outline-danger {
+        box-shadow: 0 2px 20px RGBA(220, 53, 40, 0.75);
+    }
+
+    .btn-outline-warning {
+        box-shadow: 0 2px 20px RGBA(255, 193, 7, 0.75);
+    }
+
+    #h1-index {
+        margin-top: -815px;
+    }
+
+    #html-votar {
+        overflow-y: auto !important;
+
+        background-color: RGB(21, 21, 85);
+
+        body {
+            background-color: RGB(21, 21, 85);
+        }
+    }
+
+    #h1-votar {
+        margin-top: 20px;
+    }
+
+    #quien {
+        text-align: center;
+    }
+
+    #card-julieta {
+        margin-right: 16px !important;
+        margin-top: 0px !important;
+    }
+
+    #card-coti {
+        margin-right: 16px !important;
+        margin-top: 0px !important;
+    }
+
+    #card-daniela {
+        margin-right: 16px !important;
+        margin-top: 16px !important;
+    }
+
+    #card-romina {
+        margin-right: 16px !important;
+        margin-top: 16px !important;
+    }
+
+    #html-escribana {
+        overflow-y: auto !important;
+
+        background-color: #F3F3F3;
+
+        body {
+            background-color: #F3F3F3;
+        }
+    }
+
+    #h1-escribana {
+        margin-top: 20px;
+    }
+
+    #porcentajes {
+        text-align: center;
+    }
+}
