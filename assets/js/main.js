@@ -6,18 +6,18 @@ function fecha() {
     let month = date.getMonth() + 1
     let year = date.getFullYear()
     let fecha = "";
-    
-    if(month < 10){
-      
-      if (day < 10) {
-        fecha = `0${day}/0${month}/${year}`;
-      } else {
-        fecha = `${day}/0${month}/${year}`;
-      }
-    }else{
-      fecha = `${day}/${month}/${year}`;
+
+    if (month < 10) {
+
+        if (day < 10) {
+            fecha = `0${day}/0${month}/${year}`;
+        } else {
+            fecha = `${day}/0${month}/${year}`;
+        }
+    } else {
+        fecha = `${day}/${month}/${year}`;
     }
-    
+
     console.log("Hoy es: " + fecha)
     document.getElementById("fecha").innerHTML = fecha;
 }
@@ -43,23 +43,23 @@ function votoselec(cantidad) {
 
 function votar() {
 
-    if(part_selec == "julieta") {
-        julieta = julieta+voto_selec
+    if (part_selec == "julieta") {
+        julieta = julieta + voto_selec
         nombre = julieta
-    } else if(part_selec == "coti") {
-        coti = coti+voto_selec
+    } else if (part_selec == "coti") {
+        coti = coti + voto_selec
         nombre = coti
-    } else if(part_selec == "daniela") {
-        daniela = daniela+voto_selec
+    } else if (part_selec == "daniela") {
+        daniela = daniela + voto_selec
         nombre = daniela
-    } else if(part_selec == "romina") {
-        romina = romina+voto_selec
+    } else if (part_selec == "romina") {
+        romina = romina + voto_selec
         nombre = romina
     }
 
     console.log(`Voto registrado a ${part_selec}, ahora tiene ${nombre} votos.`)
 
-    setTimeout(function (){
+    setTimeout(function () {
         Swal.fire({
             title: 'Voto registrado!',
             html: `Votaste a ${part_selec}, y le diste ${voto_selec} votos.`,
@@ -73,20 +73,24 @@ function votar() {
 
 //Función para ver el eliminado con más votos
 
-function verResultados(){
+function verResultados() {
+
+    let verificar = prompt("¿Deseas ver los resultados? Se cerrará la votación. [Y/n]").toUpperCase();
+
+    if (verificar != "Y") return alert("Cancelaste la operación.");
 
     let total = julieta + coti + daniela + romina
     let sobra = 0;
 
-    let porcentaje_julieta = (julieta*100)/total;
+    let porcentaje_julieta = (julieta * 100) / total;
     porcentaje_julieta = porcentaje_julieta.toString();
     porcentaje_julieta = porcentaje_julieta.slice(0, 5);
 
-    if(porcentaje_julieta < 10.00){
+    if (porcentaje_julieta < 10.00) {
         porcentaje_julieta = porcentaje_julieta.slice(0, 4);
 
         porcentaje_julieta = Number(porcentaje_julieta);
-        if((porcentaje_julieta.toString()).slice(-1) >= 5){
+        if ((porcentaje_julieta.toString()).slice(-1) >= 5) {
             sobra = 10 - Number((porcentaje_julieta.toString()).slice(-1))
             sobra = sobra.toString();
             sobra = "0." + sobra
@@ -96,7 +100,7 @@ function verResultados(){
     }
 
     porcentaje_julieta = Number(porcentaje_julieta);
-    if((porcentaje_julieta.toString()).slice(-1) >= 5 && (porcentaje_julieta.toString()).length >= 5){
+    if ((porcentaje_julieta.toString()).slice(-1) >= 5 && (porcentaje_julieta.toString()).length >= 5) {
         sobra = 10 - Number((porcentaje_julieta.toString()).slice(-1))
         sobra = sobra.toString();
         sobra = "0.0" + sobra
@@ -105,15 +109,15 @@ function verResultados(){
     }
 
 
-    let porcentaje_coti = (coti*100)/total;
+    let porcentaje_coti = (coti * 100) / total;
     porcentaje_coti = porcentaje_coti.toString();
     porcentaje_coti = porcentaje_coti.slice(0, 5);
 
-    if(porcentaje_coti < 10.00){
+    if (porcentaje_coti < 10.00) {
         porcentaje_coti = porcentaje_coti.slice(0, 4);
 
         porcentaje_coti = Number(porcentaje_coti);
-        if((porcentaje_coti.toString()).slice(-1) >= 5){
+        if ((porcentaje_coti.toString()).slice(-1) >= 5) {
             sobra = 10 - Number((porcentaje_coti.toString()).slice(-1))
             sobra = sobra.toString();
             sobra = "0." + sobra
@@ -123,7 +127,7 @@ function verResultados(){
     }
 
     porcentaje_coti = Number(porcentaje_coti);
-    if((porcentaje_coti.toString()).slice(-1) >= 5 && (porcentaje_coti.toString()).length >= 5){
+    if ((porcentaje_coti.toString()).slice(-1) >= 5 && (porcentaje_coti.toString()).length >= 5) {
         sobra = 10 - Number((porcentaje_coti.toString()).slice(-1))
         sobra = sobra.toString();
         sobra = "0.0" + sobra
@@ -131,15 +135,15 @@ function verResultados(){
         porcentaje_coti = porcentaje_coti + sobra;
     }
 
-    let porcentaje_daniela = (daniela*100)/total;
+    let porcentaje_daniela = (daniela * 100) / total;
     porcentaje_daniela = porcentaje_daniela.toString();
     porcentaje_daniela = porcentaje_daniela.slice(0, 5);
 
-    if(porcentaje_daniela < 10.00){
+    if (porcentaje_daniela < 10.00) {
         porcentaje_daniela = porcentaje_daniela.slice(0, 4);
 
         porcentaje_daniela = Number(porcentaje_daniela);
-        if((porcentaje_daniela.toString()).slice(-1) >= 5){
+        if ((porcentaje_daniela.toString()).slice(-1) >= 5) {
             sobra = 10 - Number((porcentaje_daniela.toString()).slice(-1))
             sobra = sobra.toString();
             sobra = "0." + sobra
@@ -149,7 +153,7 @@ function verResultados(){
     }
 
     porcentaje_daniela = Number(porcentaje_daniela);
-    if((porcentaje_daniela.toString()).slice(-1) >= 5 && (porcentaje_daniela.toString()).length >= 5){
+    if ((porcentaje_daniela.toString()).slice(-1) >= 5 && (porcentaje_daniela.toString()).length >= 5) {
         sobra = 10 - Number((porcentaje_daniela.toString()).slice(-1))
         sobra = sobra.toString();
         sobra = "0.0" + sobra
@@ -157,15 +161,15 @@ function verResultados(){
         porcentaje_daniela = porcentaje_daniela + sobra;
     }
 
-    let porcentaje_romina = (romina*100)/total;
+    let porcentaje_romina = (romina * 100) / total;
     porcentaje_romina = porcentaje_romina.toString();
     porcentaje_romina = porcentaje_romina.slice(0, 5);
 
-    if(porcentaje_romina < 10.00){
+    if (porcentaje_romina < 10.00) {
         porcentaje_romina = porcentaje_romina.slice(0, 4);
 
         porcentaje_romina = Number(porcentaje_romina);
-        if((porcentaje_romina.toString()).slice(-1) >= 5){
+        if ((porcentaje_romina.toString()).slice(-1) >= 5) {
             sobra = 10 - Number((porcentaje_romina.toString()).slice(-1))
             sobra = sobra.toString();
             sobra = "0." + sobra
@@ -175,7 +179,7 @@ function verResultados(){
     }
 
     porcentaje_romina = Number(porcentaje_romina);
-    if((porcentaje_romina.toString()).slice(-1) >= 5 && (porcentaje_romina.toString()).length >= 5){
+    if ((porcentaje_romina.toString()).slice(-1) >= 5 && (porcentaje_romina.toString()).length >= 5) {
         sobra = 10 - Number((porcentaje_romina.toString()).slice(-1))
         sobra = sobra.toString();
         sobra = "0.0" + sobra
@@ -184,28 +188,28 @@ function verResultados(){
     }
 
     let votación = [julieta, coti, daniela, romina]
-    votación = votación.sort(function(a, b){return b - a}); // --> 23, 12, 3
-    
-    
-    
-    
-    
-    
+    votación = votación.sort(function (a, b) { return b - a }); // --> 23, 12, 3
 
-    if(votación[0] == 0) {
+
+
+
+
+
+
+    if (votación[0] == 0) {
         return alert("Error: No se registraron votos aún.")
     }
 
-    if(votación[0] == votación[1]) {
+    if (votación[0] == votación[1]) {
         return alert("Suceso inédito: Empate entre dos participantes. Se recomienda dejar la votación abierta unos instantes.")
-        
+
     }
 
     let sale = votación[0];
 
     //Acá según el participante eliminado, se le cambia algunas propiedades a tu .card y se ocultan las demás.
 
-    if(sale == julieta) {
+    if (sale == julieta) {
         document.getElementById("julieta").innerHTML = "ELIMINADA";
         document.getElementById("julieta").style.fontFamily = "Parsi-Bold";
         document.getElementById("card-julieta").style.filter = "grayscale(45%)";
@@ -278,7 +282,7 @@ function verResultados(){
 
 function modal(participante) {
 
-    if(resultados != 0) {
+    if (resultados != 0) {
         return
     }
 
@@ -294,69 +298,69 @@ function modal(participante) {
 
 function mostrar_escribana() {
 
-// Resuelva la URL para obtener el valor de los votos de cada participante.
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-    results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+    // Resuelva la URL para obtener el valor de los votos de cada participante.
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
 
-let votosjulieta = getParameterByName('votosjulieta');
-let votoscoti = getParameterByName('votoscoti');
-let votosdaniela = getParameterByName('votosdaniela');
-let votosromina = getParameterByName('votosromina');
+    let votosjulieta = getParameterByName('votosjulieta');
+    let votoscoti = getParameterByName('votoscoti');
+    let votosdaniela = getParameterByName('votosdaniela');
+    let votosromina = getParameterByName('votosromina');
 
 
-//Revisa si por alguna razón, el número es más largo de lo esperado
-if(votosjulieta.length > 5) {
-    votosjulieta = Math.trunc(votosjulieta);
+    //Revisa si por alguna razón, el número es más largo de lo esperado
+    if (votosjulieta.length > 5) {
+        votosjulieta = Math.trunc(votosjulieta);
 
-}
+    }
 
-if(votoscoti.length > 5) {
-    votoscoti = Math.trunc(votoscoti);
+    if (votoscoti.length > 5) {
+        votoscoti = Math.trunc(votoscoti);
 
-}
+    }
 
-if(votosdaniela.length > 5) {
-    votosdaniela = Math.trunc(votosdaniela);
+    if (votosdaniela.length > 5) {
+        votosdaniela = Math.trunc(votosdaniela);
 
-}
+    }
 
-if(votosromina.length > 5) {
-    votosromina = Math.trunc(votosromina);
+    if (votosromina.length > 5) {
+        votosromina = Math.trunc(votosromina);
 
-}
+    }
 
-document.getElementById("votosjulieta").innerHTML =  + votosjulieta + "%";
-document.getElementById("votoscoti").innerHTML =  + votoscoti + "%";
-document.getElementById("votosdaniela").innerHTML =  + votosdaniela + "%";
-document.getElementById("votosromina").innerHTML =  + votosromina + "%";
+    document.getElementById("votosjulieta").innerHTML = + votosjulieta + "%";
+    document.getElementById("votoscoti").innerHTML = + votoscoti + "%";
+    document.getElementById("votosdaniela").innerHTML = + votosdaniela + "%";
+    document.getElementById("votosromina").innerHTML = + votosromina + "%";
 
-//Ordena de MAYOR porcentaje A MENOR porcentaje. [CICLO]
+    //Ordena de MAYOR porcentaje A MENOR porcentaje. [CICLO]
 
-let orden = [votosjulieta, votoscoti, votosdaniela, votosromina]
-    orden = orden.sort(function(a, b){return b - a}); // --> 23, 12, 3
+    let orden = [votosjulieta, votoscoti, votosdaniela, votosromina]
+    orden = orden.sort(function (a, b) { return b - a }); // --> 23, 12, 3
 
     let participants = ['julieta', 'coti', 'daniela', 'romina'];
-let votes = [votosjulieta, votoscoti, votosdaniela, votosromina];
+    let votes = [votosjulieta, votoscoti, votosdaniela, votosromina];
 
-for (let i = 0; i < participants.length; i++) {
-  if (votes[i] === orden[0]) {
-    document.getElementById(`card-${participants[i]}`).style.order = "1";
-    console.log(participants[i] + ": " + votes[i] + "%")
-  } else if (votes[i] === orden[1]) {
-    document.getElementById(`card-${participants[i]}`).style.order = "2";
-    console.log(participants[i] + ": " + votes[i] + "%")
-  } else if (votes[i] === orden[2]) {
-    document.getElementById(`card-${participants[i]}`).style.order = "3";
-    console.log(participants[i] + ": " + votes[i] + "%")
-  } else {
-    document.getElementById(`card-${participants[i]}`).style.order = "4";
-    console.log(participants[i] + ": " + votes[i] + "%")
-  }
+    for (let i = 0; i < participants.length; i++) {
+        if (votes[i] === orden[0]) {
+            document.getElementById(`card-${participants[i]}`).style.order = "1";
+            console.log(participants[i] + ": " + votes[i] + "%")
+        } else if (votes[i] === orden[1]) {
+            document.getElementById(`card-${participants[i]}`).style.order = "2";
+            console.log(participants[i] + ": " + votes[i] + "%")
+        } else if (votes[i] === orden[2]) {
+            document.getElementById(`card-${participants[i]}`).style.order = "3";
+            console.log(participants[i] + ": " + votes[i] + "%")
+        } else {
+            document.getElementById(`card-${participants[i]}`).style.order = "4";
+            console.log(participants[i] + ": " + votes[i] + "%")
+        }
 
-}
+    }
 
 }
