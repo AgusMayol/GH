@@ -22,8 +22,14 @@ function fecha() {
     document.getElementById("fecha").innerHTML = fecha;
 }
 
+let participantes = [{ id: "julieta", nombre: "JULIETA POGGIO", votos: 0, porcentaje: 0 }, { id: "coti", nombre: "CONSTANZA ROMERO", votos: 0, porcentaje: 0 }, { id: "daniela", nombre: "DANIELA CELIS", votos: 0, porcentaje: 0 }, { id: "romina", nombre: "ROMINA UHRIG", votos: 0, porcentaje: 0 }]
+
 
 // Proceso de voto
+let eliminado = "";
+let resto = "";
+let eliminados = "";
+let restos = "";
 let part_selec = "";
 let voto_selec = 1;
 
@@ -34,6 +40,50 @@ let coti = 0;
 let daniela = 0;
 let romina = 0;
 
+function cargarVotos() {
+    let votos = localStorage.getItem('resultados');
+    votos = JSON.parse(votos);
+
+    if (votos == undefined) return;
+
+    let votacións = [votos[0].votos, votos[1].votos, votos[2].votos, votos[3].votos]
+    votacións = votacións.sort(function (a, b) { return b - a }); // --> 23, 12, 3
+
+
+    for (let i = 0; i < votacións.length; i++) {
+
+        if (votacións[0] == votos[i].votos) {
+            eliminados = votos[i];
+            restos = votos.filter(participanteRs => participanteRs != votos[i]);
+        } else {
+            continue;
+        }
+
+        if (votos[i].votos == votacións[0]) {
+            document.getElementById(eliminados.id).innerHTML = "ELIMINADA";
+            document.getElementById(eliminados.id).style.fontFamily = "Parsi-Bold";
+            document.getElementById("card-" + eliminados.id).style.filter = "grayscale(45%)";
+            document.getElementById(eliminados.id).style.marginLeft = "15%";
+            document.getElementById(eliminados.id).style.marginTop = "50%";
+            document.getElementById(eliminados.id).style.fontSize = "30px";
+
+            document.getElementById("card-" + restos[0].id).style.display = "none";
+            document.getElementById("card-" + restos[1].id).style.display = "none";
+            document.getElementById("card-" + restos[2].id).style.display = "none";
+
+            document.getElementById("card-" + eliminados.id).classList.remove("me-3");
+            document.getElementById("quien").innerHTML = eliminados.nombre + " HA SIDO ELIMINADA";
+
+            document.getElementById("card-" + eliminados.id).style.pointerEvents = "none";
+        }
+    }
+
+    document.getElementById("verResultados").style.display = "none";
+    document.getElementById("verEscribana").style.display = "block";
+
+    resultados = 1;
+}
+
 function votoselec(cantidad) {
     voto_selec = cantidad;
 
@@ -43,26 +93,14 @@ function votoselec(cantidad) {
 
 function votar() {
 
-    if (part_selec == "julieta") {
-        julieta = julieta + voto_selec
-        nombre = julieta
-    } else if (part_selec == "coti") {
-        coti = coti + voto_selec
-        nombre = coti
-    } else if (part_selec == "daniela") {
-        daniela = daniela + voto_selec
-        nombre = daniela
-    } else if (part_selec == "romina") {
-        romina = romina + voto_selec
-        nombre = romina
-    }
+    participantes[part_selec].votos += voto_selec;
 
-    console.log(`Voto registrado a ${part_selec}, ahora tiene ${nombre} votos.`)
+    console.log(`Voto registrado a ${participantes[part_selec].id}, ahora tiene ${participantes[part_selec].votos} votos.`)
 
     setTimeout(function () {
         Swal.fire({
             title: 'Voto registrado!',
-            html: `Votaste a ${part_selec}, y le diste ${voto_selec} votos.`,
+            html: `Votaste a ${participantes[part_selec].id}, y le diste ${voto_selec} votos.`,
             showConfirmButton: false,
             timer: 2000,
             timerProgressBar: true,
@@ -75,126 +113,11 @@ function votar() {
 
 function verResultados() {
 
-    let verificar = prompt("¿Deseas ver los resultados? Se cerrará la votación. [Y/n]").toUpperCase();
-
-    if (verificar != "Y") return alert("Cancelaste la operación.");
-
-    let total = julieta + coti + daniela + romina
+    let total = participantes[0].votos + participantes[1].votos + participantes[2].votos + participantes[3].votos;
     let sobra = 0;
 
-    let porcentaje_julieta = (julieta * 100) / total;
-    porcentaje_julieta = porcentaje_julieta.toString();
-    porcentaje_julieta = porcentaje_julieta.slice(0, 5);
-
-    if (porcentaje_julieta < 10.00) {
-        porcentaje_julieta = porcentaje_julieta.slice(0, 4);
-
-        porcentaje_julieta = Number(porcentaje_julieta);
-        if ((porcentaje_julieta.toString()).slice(-1) >= 5) {
-            sobra = 10 - Number((porcentaje_julieta.toString()).slice(-1))
-            sobra = sobra.toString();
-            sobra = "0." + sobra
-            sobra = Number(sobra)
-            porcentaje_julieta = porcentaje_julieta + sobra;
-        }
-    }
-
-    porcentaje_julieta = Number(porcentaje_julieta);
-    if ((porcentaje_julieta.toString()).slice(-1) >= 5 && (porcentaje_julieta.toString()).length >= 5) {
-        sobra = 10 - Number((porcentaje_julieta.toString()).slice(-1))
-        sobra = sobra.toString();
-        sobra = "0.0" + sobra
-        sobra = Number(sobra)
-        porcentaje_julieta = porcentaje_julieta + sobra;
-    }
-
-
-    let porcentaje_coti = (coti * 100) / total;
-    porcentaje_coti = porcentaje_coti.toString();
-    porcentaje_coti = porcentaje_coti.slice(0, 5);
-
-    if (porcentaje_coti < 10.00) {
-        porcentaje_coti = porcentaje_coti.slice(0, 4);
-
-        porcentaje_coti = Number(porcentaje_coti);
-        if ((porcentaje_coti.toString()).slice(-1) >= 5) {
-            sobra = 10 - Number((porcentaje_coti.toString()).slice(-1))
-            sobra = sobra.toString();
-            sobra = "0." + sobra
-            sobra = Number(sobra)
-            porcentaje_coti = porcentaje_coti + sobra;
-        }
-    }
-
-    porcentaje_coti = Number(porcentaje_coti);
-    if ((porcentaje_coti.toString()).slice(-1) >= 5 && (porcentaje_coti.toString()).length >= 5) {
-        sobra = 10 - Number((porcentaje_coti.toString()).slice(-1))
-        sobra = sobra.toString();
-        sobra = "0.0" + sobra
-        sobra = Number(sobra)
-        porcentaje_coti = porcentaje_coti + sobra;
-    }
-
-    let porcentaje_daniela = (daniela * 100) / total;
-    porcentaje_daniela = porcentaje_daniela.toString();
-    porcentaje_daniela = porcentaje_daniela.slice(0, 5);
-
-    if (porcentaje_daniela < 10.00) {
-        porcentaje_daniela = porcentaje_daniela.slice(0, 4);
-
-        porcentaje_daniela = Number(porcentaje_daniela);
-        if ((porcentaje_daniela.toString()).slice(-1) >= 5) {
-            sobra = 10 - Number((porcentaje_daniela.toString()).slice(-1))
-            sobra = sobra.toString();
-            sobra = "0." + sobra
-            sobra = Number(sobra)
-            porcentaje_daniela = porcentaje_daniela + sobra;
-        }
-    }
-
-    porcentaje_daniela = Number(porcentaje_daniela);
-    if ((porcentaje_daniela.toString()).slice(-1) >= 5 && (porcentaje_daniela.toString()).length >= 5) {
-        sobra = 10 - Number((porcentaje_daniela.toString()).slice(-1))
-        sobra = sobra.toString();
-        sobra = "0.0" + sobra
-        sobra = Number(sobra)
-        porcentaje_daniela = porcentaje_daniela + sobra;
-    }
-
-    let porcentaje_romina = (romina * 100) / total;
-    porcentaje_romina = porcentaje_romina.toString();
-    porcentaje_romina = porcentaje_romina.slice(0, 5);
-
-    if (porcentaje_romina < 10.00) {
-        porcentaje_romina = porcentaje_romina.slice(0, 4);
-
-        porcentaje_romina = Number(porcentaje_romina);
-        if ((porcentaje_romina.toString()).slice(-1) >= 5) {
-            sobra = 10 - Number((porcentaje_romina.toString()).slice(-1))
-            sobra = sobra.toString();
-            sobra = "0." + sobra
-            sobra = Number(sobra)
-            porcentaje_romina = porcentaje_romina + sobra;
-        }
-    }
-
-    porcentaje_romina = Number(porcentaje_romina);
-    if ((porcentaje_romina.toString()).slice(-1) >= 5 && (porcentaje_romina.toString()).length >= 5) {
-        sobra = 10 - Number((porcentaje_romina.toString()).slice(-1))
-        sobra = sobra.toString();
-        sobra = "0.0" + sobra
-        sobra = Number(sobra)
-        porcentaje_romina = porcentaje_romina + sobra;
-    }
-
-    let votación = [julieta, coti, daniela, romina]
+    let votación = [participantes[0].votos, participantes[1].votos, participantes[2].votos, participantes[3].votos]
     votación = votación.sort(function (a, b) { return b - a }); // --> 23, 12, 3
-
-
-
-
-
-
 
     if (votación[0] == 0) {
         return alert("Error: No se registraron votos aún.")
@@ -202,79 +125,63 @@ function verResultados() {
 
     if (votación[0] == votación[1]) {
         return alert("Suceso inédito: Empate entre dos participantes. Se recomienda dejar la votación abierta unos instantes.")
-
     }
-
-    let sale = votación[0];
 
     //Acá según el participante eliminado, se le cambia algunas propiedades a tu .card y se ocultan las demás.
 
-    if (sale == julieta) {
-        document.getElementById("julieta").innerHTML = "ELIMINADA";
-        document.getElementById("julieta").style.fontFamily = "Parsi-Bold";
-        document.getElementById("card-julieta").style.filter = "grayscale(45%)";
-        document.getElementById("julieta").style.marginLeft = "15%";
-        document.getElementById("julieta").style.marginTop = "50%";
-        document.getElementById("julieta").style.fontSize = "30px";
+    for (let i = 0; i < votación.length; i++) {
 
-        document.getElementById("card-coti").style.display = "none";
-        document.getElementById("card-daniela").style.display = "none";
-        document.getElementById("card-romina").style.display = "none";
+        participantes[i].porcentaje = (participantes[i].votos * 100) / total;
+        participantes[i].porcentaje = participantes[i].porcentaje.toString();
+        participantes[i].porcentaje = participantes[i].porcentaje.slice(0, 5);
 
-        document.getElementById("card-julieta").classList.remove("me-3");
-        document.getElementById("quien").innerHTML = "JULIETA POGGIO HA SIDO ELIMINADA";
-    } else if (sale == coti) {
-        document.getElementById("coti").innerHTML = "ELIMINADA";
-        document.getElementById("coti").style.fontFamily = "Parsi-Bold";
-        document.getElementById("card-coti").style.filter = "grayscale(45%)";
-        document.getElementById("coti").style.marginLeft = "15%";
-        document.getElementById("coti").style.marginTop = "50%";
-        document.getElementById("coti").style.fontSize = "30px";
+        if (participantes[i].porcentaje < 10.00) {
+            participantes[i].porcentaje = participantes[i].porcentaje.slice(0, 4);
 
-        document.getElementById("card-julieta").style.display = "none";
-        document.getElementById("card-daniela").style.display = "none";
-        document.getElementById("card-romina").style.display = "none";
+            participantes[i].porcentaje = Number(participantes[i].porcentaje);
+            if ((participantes[i].porcentaje.toString()).slice(-1) >= 5) {
+                sobra = 10 - Number((participantes[i].porcentaje.toString()).slice(-1))
+                sobra = sobra.toString();
+                sobra = "0." + sobra
+                sobra = Number(sobra)
+                participantes[i].porcentaje = participantes[i].porcentaje + sobra;
+            }
+        }
 
-        document.getElementById("card-coti").classList.remove("me-3");
-        document.getElementById("quien").innerHTML = "CONSTANZA ROMERO HA SIDO ELIMINADA";
+        if (votación[0] == participantes[i].votos) {
+            eliminado = participantes[i];
+            resto = participantes.filter(participanteR => participanteR != participantes[i]);
+        } else {
+            continue;
+        }
 
-    } else if (sale == daniela) {
-        document.getElementById("daniela").innerHTML = "ELIMINADA";
-        document.getElementById("daniela").style.fontFamily = "Parsi-Bold";
-        document.getElementById("card-daniela").style.filter = "grayscale(45%)";
-        document.getElementById("daniela").style.marginLeft = "15%";
-        document.getElementById("daniela").style.marginTop = "50%";
-        document.getElementById("daniela").style.fontSize = "30px";
+        if (participantes[i].votos == votación[0]) {
+            document.getElementById(eliminado.id).innerHTML = "ELIMINADA";
+            document.getElementById(eliminado.id).style.fontFamily = "Parsi-Bold";
+            document.getElementById("card-" + eliminado.id).style.filter = "grayscale(45%)";
+            document.getElementById(eliminado.id).style.marginLeft = "15%";
+            document.getElementById(eliminado.id).style.marginTop = "50%";
+            document.getElementById(eliminado.id).style.fontSize = "30px";
 
-        document.getElementById("card-julieta").style.display = "none";
-        document.getElementById("card-coti").style.display = "none";
-        document.getElementById("card-romina").style.display = "none";
+            document.getElementById("card-" + resto[0].id).style.display = "none";
+            document.getElementById("card-" + resto[1].id).style.display = "none";
+            document.getElementById("card-" + resto[2].id).style.display = "none";
 
-        document.getElementById("card-daniela").classList.remove("me-3");
-        document.getElementById("quien").innerHTML = "DANIELA CELIS HA SIDO ELIMINADA";
-    } else if (sale == romina) {
-        document.getElementById("romina").innerHTML = "ELIMINADA";
-        document.getElementById("romina").style.fontFamily = "Parsi-Bold";
-        document.getElementById("card-romina").style.filter = "grayscale(45%)";
-        document.getElementById("romina").style.marginLeft = "15%";
-        document.getElementById("romina").style.marginTop = "50%";
-        document.getElementById("romina").style.fontSize = "30px";
+            document.getElementById("card-" + eliminado.id).classList.remove("me-3");
+            document.getElementById("card-" + eliminado.id).style.pointerEvents = "none";
+            document.getElementById("quien").innerHTML = eliminado.nombre + " HA SIDO ELIMINADA";
+        }
 
-        document.getElementById("card-julieta").style.display = "none";
-        document.getElementById("card-coti").style.display = "none";
-        document.getElementById("card-daniela").style.display = "none";
-
-        document.getElementById("quien").innerHTML = "ROMINA UHRIG HA SIDO ELIMINADA";
     }
 
     document.getElementById("verResultados").style.display = "none";
     document.getElementById("verEscribana").style.display = "block";
-
-    document.getElementById("verEscribana").href = `./escribana.html?votosjulieta=${porcentaje_julieta}&votoscoti=${porcentaje_coti}&votosdaniela=${porcentaje_daniela}&votosromina=${porcentaje_romina}`
+    localStorage.setItem('resultados', JSON.stringify(participantes));
+    // [ {id: '${participantes[0].id}', porcentaje: ${participantes[0].porcentaje}}, {id: ${participantes[1].id}, porcentaje: ${participantes[1].porcentaje}}, {id: ${participantes[2].id}, porcentaje: ${participantes[2].porcentaje}}, {id: ${participantes[3].id}, porcentaje: ${participantes[3].porcentaje}} ]
 
     resultados = 1;
 
-    console.log(`RESULTADOS: Julieta (${porcentaje_julieta}%), Coti (${porcentaje_coti}%), Daniela (${porcentaje_daniela}%), Romina (${porcentaje_romina}%)`)
+    console.log(`RESULTADOS: ${participantes[0].id} (${participantes[0].porcentaje}%), ${participantes[1].id} (${participantes[1].porcentaje}%), ${participantes[2].id} (${participantes[2].porcentaje}%), ${participantes[3].id} (${participantes[3].porcentaje}%)`)
 
 }
 
@@ -282,69 +189,48 @@ function verResultados() {
 
 function modal(participante) {
 
+    const myModal = document.getElementById('exampleModal')
+    const backdrop = document.getElementsByClassName('modal-backdrop fade show')
+
     if (resultados != 0) {
-        return
+        myModal.addEventListener('shown.bs.modal', () => {
+            myModal.remove();
+            backdrop[0].remove();
+        })
     }
 
     part_selec = participante;
 
-    console.log("Seleccionaste a " + part_selec)
+    console.log("Seleccionaste a " + participantes[part_selec].nombre)
 
-    document.getElementById("modal-btn-title").innerHTML = "VOTAR A " + participante.toUpperCase();
-    document.getElementById("modal-btn-votar").innerHTML = "VOTAR A " + participante.toUpperCase();
+    document.getElementById("modal-btn-title").innerHTML = "VOTAR A " + participantes[part_selec].nombre;
+    document.getElementById("modal-btn-votar").innerHTML = "VOTAR A " + participantes[part_selec].nombre;
 }
 
 //Toma los parámetros de la URL y los ingresa como variables, para ser mostrados como porcentajes.
 
 function mostrar_escribana() {
 
-    // Resuelva la URL para obtener el valor de los votos de cada participante.
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
+    let votos = localStorage.getItem('resultados');
+    votos = JSON.parse(votos);
 
-    let votosjulieta = getParameterByName('votosjulieta');
-    let votoscoti = getParameterByName('votoscoti');
-    let votosdaniela = getParameterByName('votosdaniela');
-    let votosromina = getParameterByName('votosromina');
+    for (let i = 0; i < votos.length; i++) {
 
+        if (votos[i].porcentaje.length > 5) {
+            votos[i].porcentaje = Math.trunc(votos[i].porcentaje);
+        }
 
-    //Revisa si por alguna razón, el número es más largo de lo esperado
-    if (votosjulieta.length > 5) {
-        votosjulieta = Math.trunc(votosjulieta);
+        document.getElementById("votos" + votos[i].id).innerHTML = votos[i].porcentaje + "%";
 
     }
-
-    if (votoscoti.length > 5) {
-        votoscoti = Math.trunc(votoscoti);
-
-    }
-
-    if (votosdaniela.length > 5) {
-        votosdaniela = Math.trunc(votosdaniela);
-
-    }
-
-    if (votosromina.length > 5) {
-        votosromina = Math.trunc(votosromina);
-
-    }
-
-    document.getElementById("votosjulieta").innerHTML = + votosjulieta + "%";
-    document.getElementById("votoscoti").innerHTML = + votoscoti + "%";
-    document.getElementById("votosdaniela").innerHTML = + votosdaniela + "%";
-    document.getElementById("votosromina").innerHTML = + votosromina + "%";
 
     //Ordena de MAYOR porcentaje A MENOR porcentaje. [CICLO]
 
-    let orden = [votosjulieta, votoscoti, votosdaniela, votosromina]
+    let orden = [votos[0].porcentaje, votos[1].porcentaje, votos[2].porcentaje, votos[3].porcentaje]
     orden = orden.sort(function (a, b) { return b - a }); // --> 23, 12, 3
 
     let participants = ['julieta', 'coti', 'daniela', 'romina'];
-    let votes = [votosjulieta, votoscoti, votosdaniela, votosromina];
+    let votes = [votos[0].porcentaje, votos[1].porcentaje, votos[2].porcentaje, votos[3].porcentaje];
 
     for (let i = 0; i < participants.length; i++) {
         if (votes[i] === orden[0]) {
@@ -363,4 +249,51 @@ function mostrar_escribana() {
 
     }
 
+}
+
+function participantesS() {
+    let votos = localStorage.getItem('resultados');
+    votos = JSON.parse(votos);
+
+    if (votos == undefined) return;
+
+    let orden = [votos[0].porcentaje, votos[1].porcentaje, votos[2].porcentaje, votos[3].porcentaje]
+    orden = orden.sort(function (a, b) { return b - a }); // --> 23, 12, 3
+
+    let participants = ['julieta', 'coti', 'daniela', 'romina'];
+    let votes = [votos[0].porcentaje, votos[1].porcentaje, votos[2].porcentaje, votos[3].porcentaje];
+
+    for (let i = 0; i < participants.length; i++) {
+        if (votes[i] === orden[0]) {
+
+            document.getElementById(participantes[i].id).innerHTML = "ELIMINADA";
+            document.getElementById(participantes[i].id).style.fontFamily = "Parsi-Bold";
+            document.getElementById("card-" + participantes[i].id).style.filter = "grayscale(45%)";
+            document.getElementById(participantes[i].id).style.marginLeft = "15%";
+            document.getElementById(participantes[i].id).style.marginTop = "50%";
+            document.getElementById(participantes[i].id).style.fontSize = "30px";
+
+        }
+
+    }
+}
+
+function limpiarStorage() {
+    localStorage.removeItem('resultados');
+
+    console.log("Se han borrado los resultados almacenados localmente.")
+
+    setTimeout(function () {
+        Swal.fire({
+            title: 'Limpieza de almacenamiento',
+            html: `Eliminando los resultados de votaciones anteriores. . .`,
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+        })
+    }, 0250)
+
+    setTimeout(function () {
+        location.reload();
+    }, 2300)
 }

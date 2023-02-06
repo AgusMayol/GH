@@ -55,6 +55,11 @@ html .grillado {
   background-image: none;
 }
 
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bs-light);
+  --bs-tooltip-color: var(--bs-dark);
+}
+
 @media (min-width: 0px) {
   .img-bkgd {
     aspect-ratio: 4/3;

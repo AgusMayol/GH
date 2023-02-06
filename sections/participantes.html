@@ -28,7 +28,7 @@
     <title>Gran Hermano</title>
 </head>
 
-<body onload="cargarVotos();">
+<body onload="participantesS()">
 
     <header>
         <nav class="navbar navbar-expand-lg bg-black">
@@ -72,133 +72,152 @@
     <div class="d-flex flex-column justify-content-start align-items-center">
         <h1 id="h1-votar">GRAN <span>HERMANO</span></h1>
 
-        <div class="text-light fs-4 ms-5 me-5" id="quien">¿Quién querés que abandone la casa?</div>
+        <div class="text-light fs-4 ms-5 me-5" id="quien">Participantes</div>
 
         <div class="d-flex flex-wrap justify-content-center align-items-center mt-5" data-aos="zoom-in">
 
-            <div class="card me-3 mb-5" onclick="modal(0)" id="card-julieta" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">
+            <div class="card me-3 mb-5" id="card-julieta">
                 <img src="../assets/images/julieta.jpg" class="card-img-top" alt="">
                 <div class="card-body2">
                     <h5 class="card-title" id="julieta">Julieta</h5>
                 </div>
             </div>
 
-            <div class="card me-3 mb-5" onclick="modal(1)" id="card-coti" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">
+            <div class="card me-3 mb-5" id="card-coti">
                 <img src="../assets/images/coti.jpg" class="card-img-top" alt="">
                 <div class="card-body2">
                     <h5 class="card-title" id="coti">Coti</h5>
                 </div>
             </div>
 
-            <div class="card me-3 mb-5" onclick="modal(2)" id="card-daniela" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">
+            <div class="card me-3 mb-5" id="card-daniela">
                 <img src="../assets/images/daniela.jpg" class="card-img-top" alt="">
                 <div class="card-body2">
                     <h5 class="card-title" id="daniela">Daniela</h5>
                 </div>
             </div>
 
-            <div class="card mb-5" onclick="modal(3)" id="card-romina" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">
+            <div class="card me-3 mb-5" id="card-romina">
                 <img src="../assets/images/romina.jpg" class="card-img-top" alt="">
                 <div class="card-body2">
                     <h5 class="card-title" id="romina">Romina</h5>
                 </div>
             </div>
 
-        </div>
-
-        <button class="btn btn-outline-danger btn-lg mb-5" onclick="verResultados()" id="verResultados">VER
-            RESULTADOS</button>
-        <a href="./escribana.html" target="_blank" class="btn btn-outline-warning btn-lg mb-5" id="verEscribana"
-            style="display: none;">PEDIR
-            ESCRIBANA</a>
-
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title fs-5" id="modal-btn-title" style="color: black !important;"></h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                            checked onclick="votoselec(1)">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            1 voto
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                            onclick="votoselec(5)">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            5 votos
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                            onclick="votoselec(10)">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            10 votos
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                            onclick="votoselec(15)">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            15 votos
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                            onclick="votoselec(20)">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            20 votos
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                            onclick="votoselec(25)">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            25 votos 💣
-                        </label>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="modal-btn-votar" onclick="votar()"
-                        data-bs-dismiss="modal"></button>
+            <div class="card me-3 mb-5" id="card-Agustin">
+                <img src="../assets/images/Agustin.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Agustin">Agustin</h5>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <img src="../assets/images/logo.png" class="rounded me-2" alt="">
-                <strong class="me-auto">Voto registrado!</strong>
-                <small>Ahora</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <div class="card me-3 mb-5" id="card-Alexis">
+                <img src="../assets/images/Alexis.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Alexis">Alexis</h5>
+                </div>
             </div>
-            <div class="toast-body">
-                Votaste a Julieta. Cuanto más participes en GH2022, más chances tenes de ganar premios espectaculares.
-                Podes repetir tu voto seleccionando al participante.
+
+            <div class="card me-3 mb-5" id="card-Juan">
+                <img src="../assets/images/Juan.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Juan">Juan</h5>
+                </div>
             </div>
+
+            <div class="card me-3 mb-5" id="card-Juliana">
+                <img src="../assets/images/Juliana.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Juliana">Juliana</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Lucila">
+                <img src="../assets/images/Lucila.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Lucila">Lucila</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Marcos">
+                <img src="../assets/images/Marcos.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Marcos">Marcos</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Maria-Laura">
+                <img src="../assets/images/Maria-Laura.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Maria-Laura">María Laura</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Martina">
+                <img src="../assets/images/Martina.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Martina">Martina</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Maxi">
+                <img src="../assets/images/Maxi.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Maxi">Maxi</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Mora">
+                <img src="../assets/images/Mora.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Mora">Mora</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Nacho">
+                <img src="../assets/images/Nacho.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Nacho">Nacho</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Thiago">
+                <img src="../assets/images/Thiago.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Thiago">Thiago</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Tomas">
+                <img src="../assets/images/Tomas.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Tomas">Tomás</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Walter">
+                <img src="../assets/images/Walter.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Walter">Walter</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Ariel">
+                <img src="../assets/images/Ariel.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Ariel">Ariel</h5>
+                </div>
+            </div>
+
+            <div class="card me-3 mb-5" id="card-Camila">
+                <img src="../assets/images/Camila.jpg" class="card-img-top" alt="">
+                <div class="card-body2">
+                    <h5 class="card-title" id="Camila">Camila</h5>
+                </div>
+            </div>
+
         </div>
+
     </div>
 
     <!-- JS -->
