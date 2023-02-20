@@ -22,8 +22,18 @@ function fecha() {
     document.getElementById("fecha").innerHTML = fecha;
 }
 
-let participantes = [{ id: "julieta", nombre: "JULIETA POGGIO", votos: 0, porcentaje: 0 }, { id: "coti", nombre: "CONSTANZA ROMERO", votos: 0, porcentaje: 0 }, { id: "daniela", nombre: "DANIELA CELIS", votos: 0, porcentaje: 0 }, { id: "romina", nombre: "ROMINA UHRIG", votos: 0, porcentaje: 0 }]
+//Hacemos fetch
 
+let participantes;
+
+fetch('../assets/js/participantes.json') //Especifico bien la ruta según el html que lo solicita
+    .then(response => response.json())
+    .then(data => {
+        participantes = data;
+    })
+    .catch(error => {
+        console.error('Error al obtener los participantes:', error);
+    });
 
 // Proceso de voto
 let eliminado = "";

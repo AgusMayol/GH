@@ -1,0 +1,24 @@
+[
+    { 
+        "id": "julieta", 
+        "nombre": "JULIETA POGGIO", 
+        "votos": 0, 
+        "porcentaje": 0 
+    },
+    { 
+        "id": "coti", 
+        "nombre": "CONSTANZA ROMERO", 
+        "votos": 0, 
+        "porcentaje": 0 
+    }, 
+    {   "id": "daniela",
+        "nombre": "DANIELA CELIS", 
+        "votos": 0, 
+        "porcentaje": 0 
+    }, 
+    {   "id": "romina", 
+        "nombre": "ROMINA UHRIG", 
+        "votos": 0, 
+        "porcentaje": 0 
+    }
+]
